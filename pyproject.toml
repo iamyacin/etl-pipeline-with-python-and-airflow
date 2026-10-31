@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ecommerce-etl"
+version = "0.1.0"
+description = "Excel to PostgreSQL ELT pipeline with data quality quarantine, orchestrated by Airflow."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Yacine" }]
+keywords = ["etl", "airflow", "postgresql", "data-engineering", "pandas"]
+dependencies = [
+    "openpyxl>=3.1",
+    "pandas>=2.2",
+    "psycopg[binary]>=3.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.8",
+]
+airflow = [
+    "apache-airflow==3.3.2",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ecommerce_etl"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "integration: requires a running PostgreSQL instance",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+"dags/*" = ["E402"]

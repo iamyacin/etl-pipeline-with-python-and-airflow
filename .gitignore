@@ -1,3 +1,35 @@
-venv/
+# Secrets and local environment
+.env
+.env.local
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Airflow runtime
 airflow/
 airflow-home/
+logs/*
+!logs/.gitkeep
+plugins/*
+!plugins/.gitkeep
+config/
+*.pid
+
+# Pipeline staging data (raw sample data is committed)
+data/staging/*
+!data/staging/.gitkeep
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
